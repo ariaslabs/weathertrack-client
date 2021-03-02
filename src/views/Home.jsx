@@ -61,7 +61,7 @@ export default class Home extends Component {
     loading() {
         return (
             <div className="loading-container">
-                <span className="loading">Loading...</span>
+                <span className="loading">LOADING...</span>
             </div>
         )
     }

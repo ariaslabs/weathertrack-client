@@ -151,12 +151,14 @@ img {
 }
 
 .loading-container {
-    width: 40px;
+    width: 100px;
     margin-top: 4em;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 
 .loading {
+    font-family: 'DotGothic16';
     text-align: center;
 }

@@ -68,7 +68,7 @@ export default function City() {
     function loading() {
         return (
             <div className="loading-container">
-                <span className="loading">Loading...</span>
+                <span className="loading">LOADING...</span>
             </div>
         )
     }
