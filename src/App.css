@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-family: 'serif' ;
+}
+
+nav {
+    width: 100%;
+    padding: 1.5em;
+    border-bottom: 1px solid black ;
+}
+
+#title {
+    font-weight:bolder;
+    font-size: 18px !important;
+    letter-spacing: 3px;
+    color: black;
+    font-family: 'DotGothic16';
+    text-decoration: none;
+    cursor:pointer; 
+    
+}
+
+nav .title:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.container {
+    height: 100%;
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+header {
+    position: relative;
+    padding-top: 5em;
+    padding-bottom: 6em;
+    border-bottom: 1px solid black;
+}
+
+.headerTitle {
+    font-family: 'DotGothic16';
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.header-container {
+    width: 60%;
+    margin: auto;
+}
+
+input[type=text] {
+    font-size: 20px;
+    text-decoration: none;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.search-result {
+    text-decoration: none;
+    list-style: none;
+    max-width: 600px;
+    border: 1px solid black;
+    padding: 10px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-result:hover {
+    cursor:pointer; 
+}
+
+.card {
+    position: relative;
+    padding: 1em;
+    border: 1px solid black;
+    box-shadow: 5px 5px black;
+}
+
+header .search-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+    max-width: 500px;
+}
+
+.coords {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.city-card {
+    margin: auto;
+    position: relative;
+    padding: 1em;
+    padding-bottom: 10em;
+    border: 1px solid black;
+    box-shadow: 5px 5px black;
+    height: 200px;
+    max-width: 500px;
+}
+
+.city-name {
+    font-size: 30px;
+}
+
+.img-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 120px;
+    size: 50px;
+}
+
+img {
+    float: right;
+}
+
+.temp-container {
+    position: absolute;
+    bottom: 40px;
+    left: 15px;
+    font-size: 30px;
+}
+
+.degree {
+    font-size: 20px;
+    font-weight:normal;
+}
+
+.short-forecast {
+    position: absolute;
+    text-align: right;
+    right: 0;
+    top: 90px;
+    font-size: 14px;
+}
+
+.loading-container {
+    width: 40px;
+    margin-top: 4em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loading {
+    text-align: center;
+}
