@@ -26,7 +26,9 @@ export default function City() {
             }
         }
 
-        const cityResults = await axios.get(`http://weathertrack.ariaslabs.com:5000/api/v1/city?_id=${state._id}`).then(res => res.data)
+        const apiURL = process.env.REACT_APP_API_URL
+
+        const cityResults = await axios.get(`${apiURL}/api/v1/city?_id=${state._id}`).then(res => res.data)
         const weatherResults = await axios.get(`https://api.weather.gov/points/${cityResults.lat},${cityResults.lng}/forecast/hourly`, configs)
             .then(res => res.data)
         setState({

@@ -42,7 +42,9 @@ export default class Home extends Component {
         if (e.key === 'Enter') {
         this.setState({loading: true});
 
-        let results = await axios.get(`http://weathertrack.ariaslabs.com:5000/api/v1/search?search=${e.target.value}`)
+        const apiURL = process.env.REACT_APP_API_URL
+
+        let results = await axios.get(`${apiURL}/api/v1/search?search=${e.target.value}`)
             .then(doc => doc.data)
         this.setState({
                 searchResults: results,
