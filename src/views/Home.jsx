@@ -41,7 +41,8 @@ export default class Home extends Component {
     async search(e) {
         if (e.key === 'Enter') {
         this.setState({loading: true});
-        let results = await axios.get(`http://127.0.0.1:5000/api/v1/search?search=${e.target.value}`)
+
+        let results = await axios.get(`http://weathertrack.ariaslabs.com:5000/api/v1/search?search=${e.target.value}`)
             .then(doc => doc.data)
         this.setState({
                 searchResults: results,
