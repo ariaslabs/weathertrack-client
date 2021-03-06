@@ -3,6 +3,8 @@ import {
     Redirect    
   } from "react-router-dom";
 import axios from 'axios'
+import dotenv from  'dotenv'
+import InfiniteScroll  from 'react-infinite-scroll-component'
 
 export default class Home extends Component {
 
@@ -11,7 +13,9 @@ export default class Home extends Component {
 
         this.state = {
             searchResults: [],
-            loading: false
+            loading: false,
+            page: 1,
+            search: ''
         }
         this.search = this.search.bind(this)
     }
@@ -24,6 +28,10 @@ export default class Home extends Component {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    /**
+     * 
+     * @returns list of results
+     */
     displayResults() {
         const results = this.state.searchResults.map(item => {
             return (
@@ -34,33 +42,66 @@ export default class Home extends Component {
             )
         })
 
-        return results
+        return (
+            <ul>
+                <InfiniteScroll
+                next={async () => {
+                    this.state.page++
+                    const apiURL = process.env.REACT_APP_API_URL
+                    let results = await axios.get(`${apiURL}/api/v1/search?search=${e.target.value}&page=${this.state.page}`)
+                        .then(doc => doc.data)
+                    return results
+                }}
+                endMessage={
+                    <p style={{ textAlign: 'center' }}>
+                      <b>No more to see...</b>
+                    </p>
+                  }
+                loading={<span className="loading">LOADING...</span>}
+                >{results}</InfiniteScroll>
+            </ul>
+        )
     }
 
-  
+    
+    /**
+     * Search event handler
+     * @param {*}
+     */
     async search(e) {
         if (e.key === 'Enter') {
         this.setState({loading: true});
 
         const apiURL = process.env.REACT_APP_API_URL
 
-        let results = await axios.get(`${apiURL}/api/v1/search?search=${e.target.value}`)
+        console.log(apiURL)
+
+        let results = await axios.get(`${apiURL}/api/v1/search?search=${e.target.value}&page=${this.state.page}`)
             .then(doc => doc.data)
+
+            console.log(results)
+
         this.setState({
-                searchResults: results,
+                searchResults: this.state.searchResults.concat(results.results),
                 loading: false 
             });
         }
     }
 
-     main() {
+    /**
+     *  Main process
+     */
+    main() {
         return (
             <div className="container">
-                {this.state.searchResults.length === 0 ? <p>No Results Found.</p> : <ul>{this.displayResults()}</ul>}
+                {this.state.searchResults.length === 0 ? <p>No Results Found.</p> : this.displayResults() }
             </div>
         )   
-     }
+    }
 
+    /**
+     * Loader
+     */
     loading() {
         return (
             <div className="loading-container">
@@ -68,7 +109,6 @@ export default class Home extends Component {
             </div>
         )
     }
-        
 
     render() {
         return (
