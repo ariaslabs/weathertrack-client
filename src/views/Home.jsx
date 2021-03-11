@@ -3,6 +3,7 @@ import {
     Redirect    
   } from "react-router-dom";
 import axios from 'axios'
+import RandomHeader from '../components/RandomHeader.jsx'
 
 export default class Home extends Component {
 
@@ -11,6 +12,8 @@ export default class Home extends Component {
 
         this.state = {
             searchResults: [],
+            page: 1,
+            next: null,
             loading: false
         }
         this.search = this.search.bind(this)
@@ -27,14 +30,20 @@ export default class Home extends Component {
     displayResults() {
         const results = this.state.searchResults.map(item => {
             return (
-                <li className="search-result card" key={item._id} value={item._id} onClick={() => this.toCity(item._id)}>
-                    <h4>{this.capitalizeFirstLetter(item.city)}</h4>
-                    <span>{this.capitalizeFirstLetter(item.state)}</span>
-                </li>
+  
+                    <li className="search-result card" key={item._id} value={item._id} onClick={() => this.toCity(item._id)}>
+                        <h4>{this.capitalizeFirstLetter(item.city)}</h4>
+                        <span>{this.capitalizeFirstLetter(item.state)}</span>
+                    </li>     
             )
         })
 
-        return results
+        return (
+            <div>
+                {results}
+                {this.state.next !== null ? <span>Loading...</span> : <span>Nothing More to show.</span>}
+            </div>
+        )
     }
 
   
@@ -46,8 +55,20 @@ export default class Home extends Component {
 
         let results = await axios.get(`${apiURL}/api/v1/search?search=${e.target.value}`)
             .then(doc => doc.data)
+        console.log(results)
+        let nextPage = '';
+
+        try {
+            nextPage = results.next.page
+        } catch(err) {
+            nextPage = null
+        }
+    
         this.setState({
-                searchResults: results,
+                search: e.target.value,
+                searchResults: results.results,
+                page: results.page,
+                next: nextPage,  
                 loading: false 
             });
         }
@@ -55,7 +76,7 @@ export default class Home extends Component {
 
      main() {
         return (
-            <div className="container">
+            <div className="container search-results">
                 {this.state.searchResults.length === 0 ? <p>No Results Found.</p> : <ul>{this.displayResults()}</ul>}
             </div>
         )   
@@ -76,7 +97,7 @@ export default class Home extends Component {
                 <div>
                     <header>
                         <div className="title-container">
-                            <h1 className="headerTitle">天気予報...</h1>
+                            <RandomHeader />
                         </div>
                         <div className="search-container">
                         <input type="text" placeholder='Search City...' onKeyDown={this.search} />

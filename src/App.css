@@ -111,7 +111,30 @@ header .search-container {
     border: 1px solid black;
     box-shadow: 5px 5px black;
     height: 200px;
-    max-width: 500px;
+    max-width: 600px;
+}
+
+.weekly-card {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    padding: 1em;
+    border: 1px solid black;
+    box-shadow: 5px 5px black;
+    max-width: 600px;
+}
+
+.weekly-temp {
+    font-size: 25px;
+    font-weight: bold;
+    float: right;
+}
+
+.weekly-weather-list {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .city-name {
@@ -161,4 +184,8 @@ img {
 .loading {
     font-family: 'DotGothic16';
     text-align: center;
+}
+
+.search-results {
+    padding-bottom: 2em;
 }
